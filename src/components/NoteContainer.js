@@ -48,7 +48,12 @@ export default function NoteContainer() {
 
     return (
         <>
+
+
+
             <AddContainer add={add}></AddContainer>
+
+
             <div className='noteCon'>
 
 

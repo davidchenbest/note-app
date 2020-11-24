@@ -21,7 +21,7 @@ export default function Note({ content, editNote, index, remove }) {
 
     return (
         <div className="eachNote" onClick={() => setForm(true)}>
-            <p className='content'>{content}</p>
+            <p className="content">{content}</p>
             {form && (
                 <div
                     className="formCon"
@@ -36,16 +36,18 @@ export default function Note({ content, editNote, index, remove }) {
                             onChange={(e) => setText(e.target.value)}
                             autoFocus={true}
                         ></textarea>
-                        <div className='btnCon'>
-                            <button
+                        <div className="btnCon">
+                            <i
+                                className="material-icons"
                                 onClick={(e) => {
                                     remove(e, index);
                                     setForm(false);
                                 }}
                             >
-                                Remove
-                            </button>
-                            <input type="submit" value="Save" />
+                                delete
+              </i>
+
+                            <input type="submit" value="Save" id='save' />
                         </div>
                         <span
                             id="exit"

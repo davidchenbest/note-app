@@ -1,27 +1,68 @@
 * {
   box-sizing: border-box;
-  font-size: 16px;
 }
+
+#heading {
+  width: 100%;
+  text-align: center;
+}
+#heading h1 {
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* BackGround */
+body {
+  background-color: rgb(255, 211, 194);
+}
+.eachNote,
+.addCon form {
+  background-color: white;
+}
+
+#darkMode {
+  font-size: 0.8em;
+  float: right;
+  background-color: grey;
+  color: white;
+  margin: 0.5em;
+
+  cursor: pointer;
+}
+
+#addBtn {
+  font-size: 2.5em;
+  cursor: pointer;
+}
+
 .noteCon {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-column-gap: 1em;
   grid-row-gap: 1em;
   margin: 1em auto;
+  justify-content: center;
   width: 80%;
 }
 .eachNote {
   white-space: pre-line;
-  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
-    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   border-radius: 5px;
   padding: 1em;
+  cursor: pointer;
 }
+
+.eachNote:hover {
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
 .addCon {
-  margin-top: 1em;
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 2em;
+  margin-bottom: 3em;
 }
 .addCon form {
   width: 50%;
@@ -29,7 +70,7 @@
   padding: 1em;
   display: flex;
   flex-direction: column;
-
+  position: relative;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
@@ -78,28 +119,38 @@ textarea {
 }
 
 input[type="submit"],
-button {
-  margin-top: 0.5em;
+i,
+#error,
+#darkMode {
+  margin-top: 0.5rem;
   border-radius: 5px;
-  padding: 0.3em 0.5em;
+  padding: 0.3rem 0.5rem;
   display: inline;
   border: none;
+}
+
+i:not(#addBtn) {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .addCon input[type="submit"] {
   float: right;
 }
 input[type="submit"]:hover,
-button:hover {
+i:not(#addBtn):hover {
   background-color: rgb(221, 221, 221);
+  cursor: pointer;
 }
 
 #exit {
   position: absolute;
   top: 0;
   right: 0;
-  padding: 2px 6px;
+  padding: 1px 6px;
   border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+  vertical-align: middle;
 }
 
 #exit:hover {
@@ -107,15 +158,27 @@ button:hover {
   color: white;
 }
 
+#save {
+  margin-left: auto;
+  margin-right: 0;
+  font-weight: 600;
+}
+
+/* @media screen and (max-width: 1500px) {
+  .noteCon {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+} */
+
 @media screen and (max-width: 400px) {
   .addCon form,
   .formCon form {
-    width: 100%;
+    width: 95%;
     min-width: 100px;
   }
 
   .noteCon {
-    width: 100%;
+    width: 95%;
     grid-template-columns: 1fr;
   }
 }
