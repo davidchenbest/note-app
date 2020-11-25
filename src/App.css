@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 #heading {
@@ -24,7 +25,7 @@ body {
 #darkMode {
   font-size: 0.8em;
   float: right;
-  background-color: grey;
+  background-color: #424242;
   color: white;
   margin: 0.5em;
 

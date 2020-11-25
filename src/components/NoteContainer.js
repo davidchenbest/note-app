@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import AddContainer from './AddContainer'
 import Note from './Note'
 export default function NoteContainer() {
+
+
     const [notes, setNotes] = useState([])
 
     useEffect(() => {
@@ -58,7 +60,7 @@ export default function NoteContainer() {
 
 
                 {notes.map((n, i) =>
-                    <Note content={n} key={i} index={i} editNote={editNote} remove={remove}></Note>
+                    <Note content={n} key={i} index={i} editNote={editNote} remove={remove} ></Note>
                 )}
             </div>
         </>
