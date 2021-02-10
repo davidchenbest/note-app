@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { motion } from "framer-motion";
-import { slideDownVariant, scaleVariant } from "../framer-motion/motion";
+import { slideDownVariant, scaleVariant,addNoteVariant } from "../framer-motion/motion";
 import { DarkContext } from "../contexts/DarkContext";
 
 export default function AddContainer({ add }) {
@@ -31,12 +31,13 @@ export default function AddContainer({ add }) {
   const display = () => {
     if (!showAdd)
       return (
-        <div id="heading" style={{ color }}>
+        <motion.div id="heading" style={{ color }} variants={addNoteVariant} whileHover='hover'
+        animate="animate" initial='initial'>
           <h1>Jot down a note...</h1>
           <i className="material-icons " id="addBtn" onClick={() => clickAdd()}>
             &#xe148;
           </i>
-        </div>
+        </motion.div>
       );
     return (
       <motion.form

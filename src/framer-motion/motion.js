@@ -28,3 +28,17 @@ export const scaleVariant = {
     }
 }
 
+export const addNoteVariant={
+    hover:{
+        scale: 1.2,
+        transition: { duration: .3 },
+    },
+    initial:{
+        x:0
+    },
+    animate:{
+        x: [-20, 20, 0],
+        transition: { duration:.3,type: "spring", stiffness: 100, bounce: 0, ease:'linear' },
+    }
+    
+}

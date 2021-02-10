@@ -1,8 +1,10 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer} from "react";
 import checkStorageDataType from '../modules/checkStorageDataType'
 import AddContainer from "./AddContainer";
 import Note from "./Note";
+import NoNotes from './NoNotes'
 import { notesReducer } from "../reducers/notesReducer";
+
 export default function NoteContainer() {
   const [notes, dispatch] = useReducer(notesReducer, []);
 
@@ -10,14 +12,10 @@ export default function NoteContainer() {
     if (typeof Storage !== "undefined") {
       let data = localStorage.getItem("noteList");
       data=checkStorageDataType(data)
-      if (data) {
-        // setNotes(data)
-        dispatch({ type: "SET", notes: data });
-      } else {
-        // setNotes(['Notes are stored on local storage'])
-        dispatch({ type: "SET", notes: [{title:'title',content:"Notes are stored on local storage"}] });
-      }
-    } else alert("Browser do not support web storage");
+      if (data) dispatch({ type: "SET", notes: data });
+      else dispatch({ type: "SET", notes: [{title:'title',content:"Notes are stored on local storage"}] });
+    } 
+    else alert("Browser do not support web storage");
   }, []);
 
   useEffect(() => {
@@ -45,7 +43,7 @@ export default function NoteContainer() {
       <AddContainer add={add}></AddContainer>
 
       
-        {!notes.length ? <span id='noNotes'>No notes available</span>:
+        {!notes.length ? <NoNotes/> :
         <div className="noteCon">
           {notes.map((n, i) => (
             <Note

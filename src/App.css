@@ -6,7 +6,7 @@
 }
 
 #heading {
-  width: 100%;
+  display: inline-block; 
   text-align: center;
 }
 #heading h1 {
@@ -109,6 +109,9 @@ textarea {
 }
 
 #noNotes{
+  font-size: 1rem;
+  padding: .25em .5em;
+  border-radius: 5px;
 display: table;
 margin: auto;
 }
