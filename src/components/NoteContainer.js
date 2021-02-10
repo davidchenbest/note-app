@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer } from "react";
+import checkStorageDataType from '../modules/checkStorageDataType'
 import AddContainer from "./AddContainer";
 import Note from "./Note";
 import { notesReducer } from "../reducers/notesReducer";
@@ -8,24 +9,26 @@ export default function NoteContainer() {
   useEffect(() => {
     if (typeof Storage !== "undefined") {
       let data = localStorage.getItem("noteList");
+      data=checkStorageDataType(data)
       if (data) {
-        data = data.split(";;");
         // setNotes(data)
         dispatch({ type: "SET", notes: data });
       } else {
         // setNotes(['Notes are stored on local storage'])
-        dispatch({ type: "SET", notes: ["Notes are stored on local storage"] });
+        dispatch({ type: "SET", notes: [{title:'title',content:"Notes are stored on local storage"}] });
       }
     } else alert("Browser do not support web storage");
   }, []);
+
   useEffect(() => {
     window.onbeforeunload = () => {
-      localStorage.setItem("noteList", notes.join(";;"));
+        const data = JSON.stringify(notes);
+        localStorage.setItem("noteList", data);
     };
   }, [notes]);
 
-  const editNote = (index, content) => {
-    dispatch({ type: "EDIT", id: index, note: content });
+  const editNote = (index, note) => {
+    dispatch({ type: "EDIT", id: index, note });
   };
 
   const remove = (e, index) => {
@@ -33,25 +36,30 @@ export default function NoteContainer() {
     dispatch({ type: "REMOVE", id: index });
   };
 
-  const add = (content) => {
-    dispatch({ type: "ADD", note: content });
+  const add = (note) => {
+    dispatch({ type: "ADD", note});
   };
 
   return (
     <>
       <AddContainer add={add}></AddContainer>
 
-      <div className="noteCon">
-        {notes.map((n, i) => (
-          <Note
-            content={n}
-            key={i}
-            index={i}
-            editNote={editNote}
-            remove={remove}
-          ></Note>
-        ))}
-      </div>
+      
+        {!notes.length ? <span id='noNotes'>No notes available</span>:
+        <div className="noteCon">
+          {notes.map((n, i) => (
+            <Note
+              note={n}
+              key={i}
+              index={i}
+              editNote={editNote}
+              remove={remove}
+            ></Note>
+          ))}
+        </div>
+        }
+
+      
     </>
   );
 }

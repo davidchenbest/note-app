@@ -2,18 +2,18 @@ import React, { useState, useContext } from "react";
 import { DarkContext } from '../contexts/DarkContext'
 
 
-export default function Note({ content, editNote, index, remove }) {
+export default function Note({ note, editNote, index, remove }) {
     const { isDark, colors } = useContext(DarkContext)
     const { background, color } = isDark ? colors.dark : colors.light
 
     const [form, setForm] = useState(false);
-    const [text, setText] = useState(content);
+    const [title, setTitle] = useState(note.title);
+    const [text, setText] = useState(note.content);
 
     const submit = (e) => {
         e.preventDefault();
-        editNote(index, text);
+        editNote(index, {title,content:text});
         setForm(false);
-        console.log(form);
     };
 
     const hideForm = (e) => {
@@ -26,7 +26,8 @@ export default function Note({ content, editNote, index, remove }) {
 
     return (
         <div className="eachNote" onClick={() => setForm(true)} style={{ background, color }}>
-            <p className="content" >{content}</p>
+            <p className="title" >{note.title}</p>
+            <p className="content" >{note.content}</p>
             {form && (
                 <div
                     className="formCon"
@@ -35,6 +36,7 @@ export default function Note({ content, editNote, index, remove }) {
                     }}
                 >
                     <form onSubmit={(e) => submit(e)}  >
+                        <input value={title} onChange={e=>setTitle(e.target.value)}  placeholder='title' type='text'/>
                         <textarea
                             type="text"
                             value={text}

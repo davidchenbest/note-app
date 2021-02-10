@@ -7,15 +7,17 @@ export default function AddContainer({ add }) {
   const { isDark, colors } = useContext(DarkContext);
   const { background, color } = isDark ? colors.dark : colors.light;
 
+  const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [showAdd, setShowAdd] = useState(false);
   const [error, setError] = useState(false);
 
   const addToNotes = (e, content) => {
     e.preventDefault();
-    if (content && content.trim() !== "") {
-      add(text);
+    if (content.trim() !== "") {
+      add({title,content:text});
       setText("");
+      setTitle('')
       setError(false);
       return;
     }
@@ -44,6 +46,7 @@ export default function AddContainer({ add }) {
         initial="initial"
         animate="animate"
       >
+        <input value={title} onChange={e=>setTitle(e.target.value)}  placeholder='title' type='text' style={{ background, color }}/>
         <textarea
           autoFocus={true}
           value={text}

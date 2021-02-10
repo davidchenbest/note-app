@@ -1,6 +1,8 @@
 * {
   box-sizing: border-box;
   font-family: "Nunito Sans", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 #heading {
@@ -76,17 +78,39 @@ body {
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
-textarea {
+input[type=text],textarea{
   font-size: 1.2rem;
   outline: none;
   border: none;
-  height: 8em;
-  resize: none;
   width: 100%;
 }
 
+input[type=text]{
+  border-bottom: 1px solid gray;
+  margin-bottom: 1rem;
+}
+
+textarea {
+  height: 8em;
+  resize: none;
+}
+
+.title,.content{
+  word-wrap: break-word;
+}
+
+.title{
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
 .content {
-  font-size: 1.2rem;
+  font-size: 1rem;
+}
+
+#noNotes{
+display: table;
+margin: auto;
 }
 
 .formCon {
