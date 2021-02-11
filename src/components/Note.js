@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { DarkContext } from '../contexts/DarkContext'
+import {getDate} from '../modules/getDate'
 
 
 export default function Note({ note, editNote, index, remove }) {
@@ -28,6 +29,7 @@ export default function Note({ note, editNote, index, remove }) {
         <div className="eachNote" onClick={() => setForm(true)} style={{ background, color }}>
             <p className="title" >{note.title}</p>
             <p className="content" >{note.content}</p>
+            <span className='date'>{getDate(note.date)}</span>
             {form && (
                 <div
                     className="formCon"

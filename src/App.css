@@ -53,6 +53,8 @@ body {
   border-radius: 5px;
   padding: 1em;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 .eachNote:hover {
@@ -101,10 +103,19 @@ textarea {
 
 .title{
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 2rem;
+}
+
+.date{
+  opacity: .8;
+  font-size: .8rem;
+  margin-top: auto;
+  margin-bottom: 0;
+  align-self: flex-end;
 }
 
 .content {
+  margin-top: 1rem;
   font-size: 1rem;
 }
 
