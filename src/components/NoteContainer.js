@@ -3,6 +3,7 @@ import checkStorageDataType from '../modules/checkStorageDataType'
 import AddContainer from "./AddContainer";
 import Note from "./Note";
 import NoNotes from './NoNotes'
+import Order from './order/Order'
 import { notesReducer } from "../reducers/notesReducer";
 
 export default function NoteContainer() {
@@ -44,17 +45,20 @@ export default function NoteContainer() {
 
       
         {!notes.length ? <NoNotes/> :
-        <div className="noteCon">
-          {notes.map((n, i) => (
-            <Note
-              note={n}
-              key={i}
-              index={i}
-              editNote={editNote}
-              remove={remove}
-            ></Note>
-          ))}
-        </div>
+        <>
+          <Order notesState={{notes,dispatch}} />
+          <div className="noteCon">
+            {notes.map((n, i) => (
+              <Note
+                note={n}
+                key={i}
+                index={i}
+                editNote={editNote}
+                remove={remove}
+              ></Note>
+            ))}
+          </div>
+        </>
         }
 
       
