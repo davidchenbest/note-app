@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { DarkContext } from '../contexts/DarkContext'
 import {getDate} from '../modules/getDate'
 
@@ -8,8 +8,14 @@ export default function Note({ note, editNote, index, remove }) {
     const { background, color } = isDark ? colors.dark : colors.light
 
     const [form, setForm] = useState(false);
-    const [title, setTitle] = useState(note.title);
-    const [text, setText] = useState(note.content);
+    const [title, setTitle] = useState('');
+    const [text, setText] = useState('');
+    
+    useEffect(() => {
+        setTitle(note.title)
+        setText(note.content)
+    }, [note])
+
 
     const submit = (e) => {
         e.preventDefault();

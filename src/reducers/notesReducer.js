@@ -1,7 +1,7 @@
 export const notesReducer = (state, action) => {
   switch (action.type) {
     case "ADD":
-      action.note.date = new Date()
+      action.note.date = new Date() + ''
       return [action.note, ...state];
     case "EDIT":
       let arr = [...state];
