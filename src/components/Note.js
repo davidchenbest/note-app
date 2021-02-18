@@ -1,6 +1,6 @@
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { DarkContext } from '../contexts/DarkContext'
-import {getDate} from '../modules/getDate'
+import { getDate } from '../modules/getDate'
 
 
 export default function Note({ note, editNote, index, remove }) {
@@ -8,18 +8,12 @@ export default function Note({ note, editNote, index, remove }) {
     const { background, color } = isDark ? colors.dark : colors.light
 
     const [form, setForm] = useState(false);
-    const [title, setTitle] = useState('');
-    const [text, setText] = useState('');
-    
-    useEffect(() => {
-        setTitle(note.title)
-        setText(note.content)
-    }, [note])
-
+    const titleRef = useRef()
+    const contentRef = useRef()
 
     const submit = (e) => {
         e.preventDefault();
-        editNote(index, {title,content:text});
+        editNote(index, { title: titleRef.current.value, content: contentRef.current.value });
         setForm(false);
     };
 
@@ -44,12 +38,11 @@ export default function Note({ note, editNote, index, remove }) {
                     }}
                 >
                     <form onSubmit={(e) => submit(e)}  >
-                        <input value={title} onChange={e=>setTitle(e.target.value)}  placeholder='title' type='text'/>
+                        <input ref={titleRef} defaultValue={note.title} placeholder='title' type='text' />
                         <textarea
                             type="text"
-                            value={text}
-                            onChange={(e) => setText(e.target.value)}
-                            autoFocus={true}
+                            ref={contentRef}
+                            defaultValue={note.content}
                         ></textarea>
                         <div className="btnCon">
                             <i
