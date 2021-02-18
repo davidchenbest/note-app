@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer} from "react";
+import React, { useEffect, useReducer } from "react";
 import checkStorageDataType from '../modules/checkStorageDataType'
 import AddContainer from "./AddContainer";
 import Note from "./Note";
@@ -12,17 +12,17 @@ export default function NoteContainer() {
   useEffect(() => {
     if (typeof Storage !== "undefined") {
       let data = localStorage.getItem("noteList");
-      data=checkStorageDataType(data)
+      data = checkStorageDataType(data)
       if (data) dispatch({ type: "SET", notes: data });
-      else dispatch({ type: "SET", notes: [{title:'title',content:"Notes are stored on local storage"}] });
-    } 
+      else dispatch({ type: "ADD", note: { title: 'Title', content: "Notes are stored on local storage" } });
+    }
     else alert("Browser do not support web storage");
   }, []);
 
   useEffect(() => {
     window.onbeforeunload = () => {
-        const data = JSON.stringify(notes);
-        localStorage.setItem("noteList", data);
+      const data = JSON.stringify(notes);
+      localStorage.setItem("noteList", data);
     };
   }, [notes]);
 
@@ -36,17 +36,17 @@ export default function NoteContainer() {
   };
 
   const add = (note) => {
-    dispatch({ type: "ADD", note});
+    dispatch({ type: "ADD", note });
   };
 
   return (
     <>
       <AddContainer add={add}></AddContainer>
 
-      
-        {!notes.length ? <NoNotes/> :
+
+      {!notes.length ? <NoNotes /> :
         <>
-          <Order notesState={{notes,dispatch}} />
+          <Order notesState={{ notes, dispatch }} />
           <div className="noteCon">
             {notes.map((n, i) => (
               <Note
@@ -59,9 +59,9 @@ export default function NoteContainer() {
             ))}
           </div>
         </>
-        }
+      }
 
-      
+
     </>
   );
 }
