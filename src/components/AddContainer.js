@@ -2,6 +2,7 @@ import React, { useState, useContext, useRef } from "react";
 import { motion } from "framer-motion";
 import { slideDownVariant, scaleVariant, addNoteVariant } from "../framer-motion/motion";
 import { DarkContext } from "../contexts/DarkContext";
+import Speech from './Speech'
 
 export default function AddContainer({ add }) {
   const { isDark, colors } = useContext(DarkContext);
@@ -27,6 +28,10 @@ export default function AddContainer({ add }) {
   const clickAdd = () => {
     setShowAdd(!showAdd);
   };
+
+  const speechInput = (str) => {
+    contentRef.current.value = contentRef.current.value.trim() + str
+  }
 
   const display = () => {
     if (!showAdd)
@@ -72,6 +77,7 @@ export default function AddContainer({ add }) {
             </motion.span>
           )}
           <input type="submit" value="Save" id="save" />
+          <Speech speechInput={speechInput} />
         </div>
       </motion.form>
     );

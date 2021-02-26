@@ -1,6 +1,7 @@
 import React, { useState, useContext, useRef } from "react";
 import { DarkContext } from '../contexts/DarkContext'
 import { getDate } from '../modules/getDate'
+import Speech from './Speech'
 
 
 export default function Note({ note, editNote, index, remove }) {
@@ -10,6 +11,10 @@ export default function Note({ note, editNote, index, remove }) {
     const [form, setForm] = useState(false);
     const titleRef = useRef()
     const contentRef = useRef()
+
+    const speechInput = (str) => {
+        contentRef.current.value = contentRef.current.value.trim() + str
+    }
 
     const submit = (e) => {
         e.preventDefault();
@@ -56,6 +61,7 @@ export default function Note({ note, editNote, index, remove }) {
               </i>
 
                             <input type="submit" value="Save" id='save' />
+                            <Speech speechInput={speechInput} />
                         </div>
                         <span
                             id="exit"
