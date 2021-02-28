@@ -93,11 +93,6 @@ input[type='text'] {
   margin-bottom: 1rem;
 }
 
-textarea {
-  height: 8em;
-  resize: none;
-}
-
 .title,
 .content {
   word-wrap: break-word;
@@ -106,6 +101,7 @@ textarea {
 .title {
   font-weight: bold;
   font-size: 2rem;
+  min-height: 2rem;
 }
 
 .date {

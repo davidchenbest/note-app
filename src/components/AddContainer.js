@@ -3,21 +3,22 @@ import { motion } from "framer-motion";
 import { slideDownVariant, scaleVariant, addNoteVariant } from "../framer-motion/motion";
 import { DarkContext } from "../contexts/DarkContext";
 import Speech from './Speech'
+import Editor from './Editor'
 
 export default function AddContainer({ add }) {
   const { isDark, colors } = useContext(DarkContext);
   const { background, color } = isDark ? colors.dark : colors.light;
 
   const titleRef = useRef('')
-  const contentRef = useRef('')
+  const [content, setContent] = useState('')
   const [showAdd, setShowAdd] = useState(false);
   const [error, setError] = useState(false);
 
   const addToNotes = (e) => {
     e.preventDefault();
-    if (contentRef.current.value.trim() !== "") {
-      add({ title: titleRef.current.value, content: contentRef.current.value });
-      contentRef.current.value = ''
+    if (content.trim() !== "") {
+      add({ title: titleRef.current.value, content: content });
+      setContent('')
       titleRef.current.value = ''
       setError(false);
       return;
@@ -30,7 +31,7 @@ export default function AddContainer({ add }) {
   };
 
   const speechInput = (str) => {
-    contentRef.current.value = contentRef.current.value.trim() + str
+    setContent(current => current += str)
   }
 
   const display = () => {
@@ -53,10 +54,7 @@ export default function AddContainer({ add }) {
         animate="animate"
       >
         <input ref={titleRef} placeholder='title' type='text' style={{ background, color }} autoFocus={true} />
-        <textarea
-          ref={contentRef}
-          style={{ background, color }}
-        ></textarea>
+        <Editor contentState={{ content, setContent }} />
         <div className="btnCon">
           <span
             id="exit"

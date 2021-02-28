@@ -1,7 +1,9 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { DarkContext } from '../contexts/DarkContext'
 import { getDate } from '../modules/getDate'
 import Speech from './Speech'
+import Iframe from './Iframe'
+import Editor from './Editor'
 
 
 export default function Note({ note, editNote, index, remove }) {
@@ -10,15 +12,19 @@ export default function Note({ note, editNote, index, remove }) {
 
     const [form, setForm] = useState(false);
     const titleRef = useRef()
-    const contentRef = useRef()
+    const [content, setContent] = useState('')
+
+    useEffect(() => {
+        setContent(note.content)
+    }, [note])
 
     const speechInput = (str) => {
-        contentRef.current.value = contentRef.current.value.trim() + str
+        setContent(current => current += str)
     }
 
     const submit = (e) => {
         e.preventDefault();
-        editNote(index, { title: titleRef.current.value, content: contentRef.current.value });
+        editNote(index, { title: titleRef.current.value, content: content });
         setForm(false);
     };
 
@@ -33,8 +39,9 @@ export default function Note({ note, editNote, index, remove }) {
     return (
         <div className="eachNote" onClick={() => setForm(true)} style={{ background, color }}>
             <p className="title" >{note.title}</p>
-            <p className="content" >{note.content}</p>
-            <span className='date'>{getDate(note.date)}</span>
+            <Iframe content={note.content} title={note.title} />
+            {/* { note.content} */}
+            < span className='date'>{getDate(note.date)}</span>
             {form && (
                 <div
                     className="formCon"
@@ -44,11 +51,7 @@ export default function Note({ note, editNote, index, remove }) {
                 >
                     <form onSubmit={(e) => submit(e)}  >
                         <input ref={titleRef} defaultValue={note.title} placeholder='title' type='text' />
-                        <textarea
-                            type="text"
-                            ref={contentRef}
-                            defaultValue={note.content}
-                        ></textarea>
+                        <Editor contentState={{ content, setContent }} />
                         <div className="btnCon">
                             <i
                                 className="material-icons"
