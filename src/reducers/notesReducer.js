@@ -22,12 +22,19 @@ export const notesReducer = (state, action) => {
 };
 
 
-function sort(arr,category,order){
-  arr.sort((a,b)=>{
-    let x =  category === 'date' ? a[category] : a[category].toLowerCase()
-    let y =  category === 'date' ? b[category] : b[category].toLowerCase()
-    if(x>y) return order === 'asc' ? 1 : -1 
-    if(x<y) return order === 'asc' ? -1 : 1 
+function sort(arr, category, order) {
+  arr.sort((a, b) => {
+    let x = category === 'date' ? a[category] : a[category].toLowerCase()
+    let y = category === 'date' ? b[category] : b[category].toLowerCase()
+
+    if (category === 'content') {
+      // REMOVE STARTING TAG
+      x = x.replace(/(<.+?>)/i, '')
+      y = y.replace(/(<.+?>)/i, '')
+    }
+
+    if (x > y) return order === 'asc' ? 1 : -1
+    if (x < y) return order === 'asc' ? -1 : 1
     return 0
   })
 }
