@@ -49,6 +49,7 @@ body {
   width: 80%;
 }
 .eachNote {
+  position: relative;
   white-space: pre-line;
   border-radius: 5px;
   padding: 1em;
@@ -60,6 +61,13 @@ body {
 .eachNote:hover {
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.eachNote .edit {
+  font-size: 0.5rem;
+  top: 0rem;
+  right: 0.25rem;
+  position: absolute;
 }
 
 .addCon {

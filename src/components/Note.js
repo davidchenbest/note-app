@@ -38,9 +38,9 @@ export default function Note({ note, editNote, index, remove }) {
 
     return (
         <div className="eachNote" onClick={() => setForm(true)} style={{ background, color }}>
+            <i className="material-icons edit">&#xe254;</i>
             <p className="title" >{note.title}</p>
             <Iframe content={note.content} title={note.title} />
-            {/* { note.content} */}
             < span className='date'>{getDate(note.date)}</span>
             {form && (
                 <div
