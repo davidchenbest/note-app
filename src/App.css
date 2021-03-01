@@ -41,13 +41,28 @@ body {
 
 .noteCon {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-column-gap: 1em;
   grid-row-gap: 1em;
   margin: 1em auto;
   justify-content: center;
   width: 80%;
 }
+
+.gridView {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.listView {
+  grid-template-columns: 1fr;
+}
+
+.viewButtonCon {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .eachNote {
   position: relative;
   white-space: pre-line;
@@ -211,7 +226,7 @@ i:not(#addBtn):hover {
 }
 
 /* @media screen and (max-width: 1500px) {
-  .noteCon {
+  .grid {
     grid-template-columns: 1fr 1fr 1fr;
   }
 } */
@@ -223,7 +238,7 @@ i:not(#addBtn):hover {
     min-width: 100px;
   }
 
-  .noteCon {
+  .grid {
     width: 95%;
     grid-template-columns: 1fr;
   }

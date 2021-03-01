@@ -1,12 +1,14 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import checkStorageDataType from '../modules/checkStorageDataType'
 import AddContainer from "./AddContainer";
 import Note from "./Note";
 import NoNotes from './NoNotes'
 import Order from './order/Order'
 import { notesReducer } from "../reducers/notesReducer";
+import ViewToggle from "./ViewToggle";
 
 export default function NoteContainer() {
+  const [listView, setListView] = useState(false)
   const [notes, dispatch] = useReducer(notesReducer, []);
 
   useEffect(() => {
@@ -46,8 +48,11 @@ export default function NoteContainer() {
 
       {!notes.length ? <NoNotes /> :
         <>
-          <Order notesState={{ notes, dispatch }} />
-          <div className="noteCon">
+          <div className='viewButtonCon'>
+            <ViewToggle listViewState={{ listView, setListView }} />
+            <Order notesState={{ notes, dispatch }} />
+          </div>
+          <div className={`noteCon ${listView ? 'listView' : 'gridView'}`}>
             {notes.map((n, i) => (
               <Note
                 note={n}
