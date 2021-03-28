@@ -6,6 +6,7 @@ import NoNotes from './NoNotes'
 import Order from './order/Order'
 import { notesReducer } from "../reducers/notesReducer";
 import ViewToggle from "./ViewToggle";
+import Export from "./csv/Export";
 
 export default function NoteContainer() {
   const [listView, setListView] = useState(false)
@@ -48,6 +49,7 @@ export default function NoteContainer() {
 
       {!notes.length ? <NoNotes /> :
         <>
+          <Export notes={notes} />
           <div className='viewButtonCon'>
             <ViewToggle listViewState={{ listView, setListView }} />
             <Order notesState={{ notes, dispatch }} />
